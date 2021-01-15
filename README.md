@@ -2,69 +2,259 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+1. React
 
-In the project directory, you can run:
+   1. Products Component
+      1. Create data.json {products:[{_id, title, ...}]
+      2. Update App.js to import data.json
+      3. div.content {flex, wrap}
+      4. div.main {flex: 3 60rem}
+      5. div.sidebar {flex: 1 20rem;}
+      6. Create components/Products.js component
+      7. Add it to div.main in App.js and set products props
+      8. ul.products {flex,center, center,warp, p:0,m:0, style:none}
+      9. this.props.products.map(p => li.key={p.\_id} {flex, p:1, m:1, none,h:47}
+      10. div.product { flex, column, space-between, h:100%}
+      11. a href="#" > img {max-width, max-height:37} + p {p.title}
+      12. div.product-price > div.product.price + button.button.primary Add to cart
+      13. product-price {flex, space-between, center}
+      14. div {p.price} flex: 1; align: center; size: 2rem
+      15. button.button.primary Add To Cart
+   2. Filter Component
+      1. Create components/Filter.js
+      2. Add it above Products component in App.js
+      3. Update Filter.js render
+      4. div.filter {flex, wrap, p,m:1rem, border-bottom: .1rem}
+      5. filter-result {this.props.filteredProducts.length}
+      6. filter-sort {flex:1}
+      7. label Order select value=this.props.sort
+      8. onChange= this.props.sortProducts(e.t.value)
+      9. option lowestprice Lowest, ...
+      10. filter-size {flex:1}
+      11. label Filter select value=this.props.size
+      12. onChange= this.props.filterProducts(e.t.value)
+      13. option "" ALL, XS, S, M, L, XL, XXL
+      14. App.js
+      15. Add Filter Component
+   3. Cart Component
+      1. Set Active Task Management Spreadsheet
+      2. Create branch cart-component
+      3. Product.js
+      4. Handle "Add To Cart" to this.props.addToCart(product)
+      5. App.js
+      6. Add cartItems to state as []
+      7. Create addToCart(product)
+      8. Slice, Check product existance, add to cartitems
+      9. Cart.js
+      10. Define cartItems from this.props
+      11. Check cartItems.length and show message
+      12. List cartItems {cartItems.length > 0 && (}
+      13. index.css
+      14. Style cart, cart-header, cart-items (img, li),
+      15. Publish changes
+      16. Pull request, merge, change to master
+      17. Task Management Spreadsheet set it done
+   4. Checkout Form
+      1. Set Active Task Management Spreadsheet
+      2. Create branch checkout-form
+      3. Cart.js
+      4. Make cart items persistent
+      5. Use LocalStorage on App constructor to load cart items (JSON.parse)
+      6. Use LocalStorage on addToCart to save cart items (JSON.stringify)
+      7. Handle Click on Proceed
+      8. Update showCheckout state to true on click
+      9. Conditional rendering Checkout Form
+      10. Get Email, Name and Address required input
+      11. Define handleInput function
+      12. Add Checkout Button
+      13. Handle onSubmit Form Event by this.createOrder
+      14. Create order object and pass to parent to handle it
+      15. Commit and Publish changes
+      16. Pull request, merge, change to master
+      17. Task Management Spreadsheet set it done
+   5. Add Modal and Animation
+      1. Set Active Task Management Spreadsheet
+      2. Create branch animation-modal
+      3. Show Animation
+      4. Install react-reveal
+      5. Create fade effect from bottom for products
+      6. Create fade left for add to cart
+      7. Create fade right for show checkout form
+      8. Open Modal by click on product image
+      9. Install react-modal
+      10. Products.js
+      11. Import Modal
+      12. Set state for product to null
+      13. Define openModal and closeModal
+      14. Show Modal if product exist
+      15. Create Modal
+      16. Create zoom effect for modal
+      17. index.css
+      18. Style Product Details
+      19. Commit and Publish changes
+      20. Pull request, merge, change to master
+      21. Task Management Spreadsheet set it done
 
-### `npm start`
+2. Node.JS
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+   1. Create Products Backend
+      1. Install nodemon globally
+      2. Add server.js
+      3. Install express body-parser mongoose shortid
+      4. Install MongoDB
+      5. app = express()
+      6. app.use(bodyParser.json())
+      7. mongoose.connect()
+      8. create Product model
+      9. app.post("/api.products")
+      10. Postman send post request
+      11. route.get("/api/products")
+      12. route.delete("/api/products/:id")
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+3. Redux
 
-### `npm test`
+   1. Add Redux
+      1. what is redux (diagram)
+      2. update task on spreadsheet
+      3. create branch add-redux-products
+      4. npm install redux react-redux redux-thunk
+      5. create types
+      6. types.js
+      7. define FETCH_PRODUCTS
+      8. actions/productActions.js
+      9. declare fetchProducts
+      10. create reducers
+      11. reducers/productReducers.js
+      12. define case FETCH_PRODUCTS
+      13. create store
+      14. store.js
+      15. import redux
+      16. set initial state
+      17. define initialState
+      18. create store
+      19. import productReducers
+      20. combine reducers
+      21. Use store
+      22. App.js
+      23. import store
+      24. wrap all in Provider
+      25. connect products
+      26. components/Products.js
+      27. connect to store
+      28. import fetchProducts
+      29. fetch products on did mount
+      30. package.json
+      31. set proxy to http://127.0.0.1:5000
+      32. npm run server
+      33. check products list
+      34. commit and publish
+      35. send pull request and merge
+      36. update spreadsheet
+   2. Add Redux To Filter
+      1. Updte task and branch
+      2. types.js
+      3. create FILTER_PRODUCTS_BY_SIZE
+      4. create ORDER_PRODUCTS_BY_PRICE
+      5. actions/productActions.js
+      6. create filterProducts
+      7. move app.js filterProducts logic here
+      8. create sortProducts
+      9. move app.js filterProducts logic here
+      10. reducers/productReducers.js
+      11. case FILTER_PRODUCTS_BY_SIZE
+      12. case ORDER_PRODUCTS_BY_PRICE
+      13. Filter.js
+      14. connect props: size, sort, items and filteredItems
+      15. connect actions: filterProducts and sortProducts
+      16. show loading if no filteredProducts
+      17. App.js
+      18. remove Filter props
+      19. check result
+      20. update task and branch
+   3. Add Redux To Cart
+      1. Updte task and branch
+      2. types.js
+      3. create ADD_TO_CART
+      4. create REMOVE_FROM_CART
+      5. actions/cartActions.js
+      6. create addToCart
+      7. create removeFromCart
+      8. reducers/cartReducers.js
+      9. case ADD_TO_CART
+      10. case REMOVE_FROM_CART
+      11. Cart.js
+      12. connect props: cartItems
+      13. connect actions: removeFromCart
+      14. Product.js
+      15. add action addToCart
+      16. App.js
+      17. remove Cart props
+      18. store.js
+      19. set initial cartItems to localStorage
+      20. check result
+      21. update task and branch
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+4. Advanced Topics
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+   1. Create Order
+      1. Backend
+      2. server.js
+      3. create order modal
+      4. get /api/orders
+      5. post /api/orders
+      6. delete /api/orders/:id
+      7. Frontend
+      8. create types
+      9. types.js
+      10. CLEAR_ORDER, CLEAR_CART, CREATE_ORDER
+      11. create actions
+      12. actions/orderActions.js
+      13. createOrder(order)
+      14. clearOrder()
+      15. create reducers
+      16. reducers/orderReducers.js
+      17. case CREATE_ORDER
+      18. case CLEAR_ORDER
+      19. Update Cart Component
+      20. components/Cart.js
+      21. connect order, createOrder, clearOrder
+      22. form onSubmit={this.createOrder}
+      23. createOrder() this.props.createOrder(order)
+      24. closeModal() this.props.clearOrder()
+      25. render()
+      26. const { cartItems, order } = this.props;
+      27. {order && (<Modal></Modal>}
+   2. Manage Orders
+      1. Add new page
+      2. Install react-router-dom
+      3. App.js
+      4. Import BrowserRouter, Route, Link
+      5. render()
+      6. BrowserRouter
+      7. Route path="/admin" component={AdminScreen}
+      8. Route path="/" exact={true} component={HomeScreen}
+      9. HomeScreen.js
+      10. <Filter /> <Products /> <Cart />
+      11. AdminScreen.js
+      12. <Orders />
+      13. components/Orders.js
+      14. render() <div> Orders </div>
+      15. Backend
+      16. server.js
+      17. app.get("/api/orders")
+      18. app.delete("/api/orders/:id")
+      19. Frontend
+      20. types.js
+      21. FETCH_ORDERS
+      22. actions/orderActions.js
+      23. fetchOrders()
+      24. reducers/orderReducers.js
+      25. case FETCH_ORDERS {orders: action.payload}
+      26. components/Orders.js
+      27. connect orders, fetchOrders
+      28. componentDidMount() fetchOrders
+      29. render()
+      30. !orders <div>Loading...</div>
+      31. table orders
+      32. index.css
+      33. style orders
