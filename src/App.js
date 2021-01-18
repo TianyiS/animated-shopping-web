@@ -8,10 +8,6 @@ import { Provider } from 'react-redux';
 
 class App extends React.Component {
 
-  createOrder = (order) => {
-      alert("Need to save order for " + order.name)
-    }
-
   render () {
     return (
       <Provider store={store}>
@@ -26,10 +22,7 @@ class App extends React.Component {
               <Products />
             </div>
             <div className='sidebar'> 
-              <Cart 
-                createOrder={this.createOrder}
-              >
-              </Cart> 
+              <Cart />
             </div>
           </div>
         </main>
