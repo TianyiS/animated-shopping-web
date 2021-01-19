@@ -44,7 +44,11 @@ class Orders extends Component {
                     </div>
                   ))}
                 </td>
-                <td onClick={() => this.props.removeFromOrders(orders, order)}>Delete</td>
+                <td>
+                    <button className='button primary' 
+                            onClick={() => this.props.removeFromOrders(orders, order)}
+                    >Delete</button>
+                </td>
               </tr>
             ))}
           </tbody>
