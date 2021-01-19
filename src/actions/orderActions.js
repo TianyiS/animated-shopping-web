@@ -37,16 +37,27 @@ export const fetchOrders = () => dispatch => {
     })
 }
 
-export const removeFromOrders = (orders, order) => (dispatch) => {
-    fetch (`/api/orders/${order._id}`, {
-        method: "DELETE"
-    })
-    .then((res) => res.json())
-    .then((data) => {
-        const orderAfterDeleted = orders.filter(o => data._id !== o._id );
-        dispatch ({
-            type: DELETE_ORDER,
-            payload: orderAfterDeleted,
-        })
-    })
+// export const removeFromOrders = (orders, order) => (dispatch) => {
+//     fetch (`/api/orders/${order._id}`, {
+//         method: "DELETE"
+//     })
+//     .then((res) => res.json())
+//     .then((data) => {
+//         const orderAfterDeleted = orders.filter(o => data._id !== o._id );
+//         dispatch ({
+//             type: DELETE_ORDER,
+//             payload: orderAfterDeleted,
+//         })
+//     })
+// }
+export const removeFromOrders = (orders, order) => async (dispatch) => {
+    const res = await fetch (`/api/orders/${order._id}`, {
+                                method: "DELETE"
+                            });
+    const data = await res.json();
+    const orderAfterDeleted = orders.filter(o => data._id !== o._id );
+    dispatch ({
+        type: DELETE_ORDER,
+        payload: orderAfterDeleted,
+    });
 }
