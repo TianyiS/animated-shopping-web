@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchOrders } from "../actions/orderActions";
+import { fetchOrders, removeFromOrders } from "../actions/orderActions";
 import formatCurrency from "../util";
 
 class Orders extends Component {
@@ -9,6 +9,7 @@ class Orders extends Component {
   }
   render() {
     const { orders } = this.props;
+    
     return !orders ? (
       <div>Orders</div>
     ) : (
@@ -24,6 +25,7 @@ class Orders extends Component {
               <th>EMAIL</th>
               <th>ADDRESS</th>
               <th>ITEMS</th>
+              <th>EDIT</th>
             </tr>
           </thead>
           <tbody>
@@ -42,6 +44,7 @@ class Orders extends Component {
                     </div>
                   ))}
                 </td>
+                <td onClick={() => this.props.removeFromOrders(orders, order)}>Delete</td>
               </tr>
             ))}
           </tbody>
@@ -55,6 +58,6 @@ export default connect(
     orders: state.order.orders,
   }),
   {
-    fetchOrders,
+    fetchOrders, removeFromOrders
   }
 )(Orders);

@@ -1,7 +1,5 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
 1. React
 
    1. Products Component
@@ -223,7 +221,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
       24. closeModal() this.props.clearOrder()
       25. render()
       26. const { cartItems, order } = this.props;
-      27. {order && (<Modal></Modal>}
+      27. {order && (<Modal></Modal>)}
    2. Manage Orders
       1. Add new page
       2. Install react-router-dom

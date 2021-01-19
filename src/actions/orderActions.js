@@ -1,4 +1,4 @@
-import { CLEAR_CART, CLEAR_ORDER, CREATE_ORDER, FETCH_ORDERS } from "../types"
+import { CLEAR_CART, CLEAR_ORDER, CREATE_ORDER, FETCH_ORDERS, DELETE_ORDER } from "../types"
 
 export const createOrder = (order) => (dispatch) => {
     fetch("/api/orders", {
@@ -33,6 +33,20 @@ export const fetchOrders = () => dispatch => {
         dispatch ({
             type: FETCH_ORDERS,
             payload: data,
+        })
+    })
+}
+
+export const removeFromOrders = (orders, order) => (dispatch) => {
+    fetch (`/api/orders/${order._id}`, {
+        method: "DELETE"
+    })
+    .then((res) => res.json())
+    .then((data) => {
+        const orderAfterDeleted = orders.filter(o => data._id !== o._id );
+        dispatch ({
+            type: DELETE_ORDER,
+            payload: orderAfterDeleted,
         })
     })
 }
