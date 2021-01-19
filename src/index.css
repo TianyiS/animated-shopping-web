@@ -40,7 +40,8 @@ header {
   color: #ffffff;
   display: flex;
   align-items: center;
-  padding: 0.5rem;
+  padding: 1rem;
+  justify-content: space-between;
 }
 header a {
   color: #ffffff;
@@ -240,4 +241,19 @@ input {
 }
 .success-message {
   color: green;
+}
+
+/* Orders */
+.orders {
+  width: 100%;
+  padding: 10px;
+}
+tbody > tr:nth-child(odd) {
+  background-color: #f0f0f0;
+}
+td {
+  padding: 5px;
+}
+th {
+  text-align: left;
 }
