@@ -2,13 +2,18 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const shortid = require("shortid");
+var path = require("path");
+
 const port = process.env.PORT || 5000;
 
 const app = express();
 app.use(bodyParser.json());
 
-app.use("/", express.static(__dirname + "/build"));
-app.get("/", (req, res) => res.sendFile(__dirname + "/build/index.html"));
+app.use(express.static(path.join(__dirname, 'build')));
+
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 
 // mongoose.connect("mongodb://localhost/awesome-shopping-web-db",{
 //     useNewUrlParser: true,
