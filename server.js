@@ -2,10 +2,11 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const shortid = require("shortid");
-var path = require("path");
+const path = require("path");
+const { createProxyMiddleware } = require('http-proxy-middleware');
+
 
 const port = process.env.PORT || 5000;
-const proxy = require('http-proxy-middleware');
 
 const app = express();
 app.use(bodyParser.json());
@@ -16,12 +17,11 @@ app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
-module.exports = function(app) {
-    app.use(proxy('/api/products', { target: 'http://localhost:5000' }));
-    app.use(proxy('/api/products/:id', { target: 'http://localhost:5000' }));
-    app.use(proxy('/api/orders', { target: 'http://localhost:5000' }));
-    app.use(proxy('/api/orders/:id', { target: 'http://localhost:5000' }));
-};
+app.use('/api/products', createProxyMiddleware({ target: 'http://localhost:5000', changeOrigin: true }));
+app.use('/api/products/:id', createProxyMiddleware({ target: 'http://localhost:5000', changeOrigin: true }));
+app.use('/api/orders', createProxyMiddleware({ target: 'http://localhost:5000', changeOrigin: true }));
+app.use('/api/orders/:id', createProxyMiddleware({ target: 'http://localhost:5000', changeOrigin: true }));
+
 
 // mongoose.connect("mongodb://localhost/awesome-shopping-web-db",{
 //     useNewUrlParser: true,
