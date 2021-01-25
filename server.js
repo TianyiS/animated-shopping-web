@@ -5,6 +5,7 @@ const shortid = require("shortid");
 var path = require("path");
 
 const port = process.env.PORT || 5000;
+const proxy = require('http-proxy-middleware');
 
 const app = express();
 app.use(bodyParser.json());
@@ -14,6 +15,13 @@ app.use(express.static(path.join(__dirname, 'build')));
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
+
+module.exports = function(app) {
+    app.use(proxy('/api/products', { target: 'http://localhost:5000' }));
+    app.use(proxy('/api/products/:id', { target: 'http://localhost:5000' }));
+    app.use(proxy('/api/orders', { target: 'http://localhost:5000' }));
+    app.use(proxy('/api/orders/:id', { target: 'http://localhost:5000' }));
+};
 
 // mongoose.connect("mongodb://localhost/awesome-shopping-web-db",{
 //     useNewUrlParser: true,
