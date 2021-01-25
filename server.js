@@ -7,11 +7,28 @@ const port = process.env.PORT || 5000;
 const app = express();
 app.use(bodyParser.json());
 
-mongoose.connect("mongodb://localhost/awesome-shopping-web-db",{
+app.use("/", express.static(__dirname + "/build"));
+app.get("/", (req, res) => res.sendFile(__dirname + "/build/index.html"));
+
+// mongoose.connect("mongodb://localhost/awesome-shopping-web-db",{
+//     useNewUrlParser: true,
+//     useCreateIndex: true,
+//     useUnifiedTopology: true,
+// })
+
+const url = `mongodb+srv://Ethan:19920713@cluster0.na66d.mongodb.net/default?retryWrites=true&w=majority`
+const connectionParams={
     useNewUrlParser: true,
     useCreateIndex: true,
-    useUnifiedTopology: true,
-})
+    useUnifiedTopology: true 
+}
+mongoose.connect(url, connectionParams)
+    .then( () => {
+        console.log('Connected to database ')
+    })
+    .catch( (err) => {
+        console.error(`Error connecting to the database. \n${err}`);
+    })
 
 const Product = mongoose.model(
     "products",
