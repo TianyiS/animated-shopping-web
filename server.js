@@ -20,25 +20,25 @@ if(process.env.NODE_ENV === 'production') {
 // app.use('/api/orders/:id', createProxyMiddleware({ target: 'http://localhost:5000', changeOrigin: true }));
 
 
-// mongoose.connect("mongodb://localhost/awesome-shopping-web-db",{
-//     useNewUrlParser: true,
-//     useCreateIndex: true,
-//     useUnifiedTopology: true,
-// })
-
-const url = `mongodb+srv://Ethan:19920713@cluster0.na66d.mongodb.net/default?retryWrites=true&w=majority`
-const connectionParams={
+mongoose.connect("mongodb://localhost/awesome-shopping-web-db",{
     useNewUrlParser: true,
     useCreateIndex: true,
-    useUnifiedTopology: true 
-}
-mongoose.connect(url, connectionParams)
-    .then( () => {
-        console.log('Connected to database ')
-    })
-    .catch( (err) => {
-        console.error(`Error connecting to the database. \n${err}`);
-    })
+    useUnifiedTopology: true,
+})
+
+// const url = `mongodb+srv://Ethan:1992@cluster0.na66d.mongodb.net/default?retryWrites=true&w=majority`
+// const connectionParams={
+//     useNewUrlParser: true,
+//     useCreateIndex: true,
+//     useUnifiedTopology: true 
+// }
+// mongoose.connect(url, connectionParams)
+//     .then( () => {
+//         console.log('Connected to database ')
+//     })
+//     .catch( (err) => {
+//         console.error(`Error connecting to the database. \n${err}`);
+//     })
 
 const Product = mongoose.model(
     "products",

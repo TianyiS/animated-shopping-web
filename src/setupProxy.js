@@ -4,28 +4,28 @@ module.exports = function(app) {
   app.use(
     '/api/products',
     createProxyMiddleware({
-      target: 'https://animated-shopping-web.herokuapp.com/',
+      target: 'http://localhost:5000',
       changeOrigin: true,
     })
   );
   app.use(
     '/api/products/:id',
     createProxyMiddleware({
-      target: 'https://animated-shopping-web.herokuapp.com/',
+      target: 'http://localhost:5000',
       changeOrigin: true,
     })
   );
   app.use(
     '/api/orders',
     createProxyMiddleware({
-      target: 'https://animated-shopping-web.herokuapp.com/',
+      target: 'http://localhost:5000',
       changeOrigin: true,
     })
   );
   app.use(
     '/api/orders/:id',
     createProxyMiddleware({
-      target: 'https://animated-shopping-web.herokuapp.com/',
+      target: 'http://localhost:5000',
       changeOrigin: true,
     })
   );
