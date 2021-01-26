@@ -8,8 +8,11 @@ const path = require("path");
 const app = express();
 app.use(bodyParser.json());
 
-app.use("/", express.static(__dirname + "/build"));
-app.get("/", (req, res) => res.sendFile(__dirname + "/build/index.html"));
+if(process.env.NODE_ENV === 'production') {
+    app.use("/", express.static(path.join(__dirname + "/build")));
+    app.get("/", (req, res) => res.sendFile(path.join(__dirname + "/build/index.html")));
+}
+
 
 // app.use('/api/products', createProxyMiddleware({ target: 'http://localhost:5000', changeOrigin: true }));
 // app.use('/api/products/:id', createProxyMiddleware({ target: 'http://localhost:5000', changeOrigin: true }));
