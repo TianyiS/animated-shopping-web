@@ -26,7 +26,7 @@ mongoose.connect("mongodb://localhost/awesome-shopping-web-db", {
   useUnifiedTopology: true,
 });
 
-const url = `mongodb+srv://Ethan:1992@cluster0.na66d.mongodb.net/default?retryWrites=true&w=majority`;
+const url = `mongodb+srv://Ethan:19920713@cluster0.na66d.mongodb.net/default?retryWrites=true&w=majority`;
 const connectionParams = {
   useNewUrlParser: true,
   useCreateIndex: true,
