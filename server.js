@@ -33,7 +33,10 @@ const connectionParams = {
   useUnifiedTopology: true,
 };
 mongoose
-  .connect(url, connectionParams)
+  .connect(
+    url || "mongodb://localhost/awesome-shopping-web-db",
+    connectionParams
+  )
   .then(() => {
     console.log("Connected to database ");
   })
